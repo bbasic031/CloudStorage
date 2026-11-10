@@ -14,6 +14,7 @@
     <div class="progress mt-1" style="height: 10px;">
         <div class="progress-bar" style="width: {{ $percent }}%"></div>
     </div>
+    <small class="text-muted">{{ $percent }}% used</small>
 </div>
 
 <form method="POST" action="{{ route('profile.update') }}">

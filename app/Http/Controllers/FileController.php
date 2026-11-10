@@ -73,6 +73,6 @@ class FileController extends Controller
         Storage::delete($file->path);
         $file->delete();
 
-        return back()->with('success', 'File deleted.');
+        return redirect()->route('files.index')->with('success', 'File deleted.');
     }
 }
