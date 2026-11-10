@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             $roles[$name] = Role::firstOrCreate(['name' => $name], ['label' => $label]);
         }
 
-        // Fixed demo accounts (password: "password")
         User::factory()->create([
             'username' => 'superadmin', 'name' => 'Super', 'last_name' => 'Admin',
             'email' => 'superadmin@example.com',
@@ -32,9 +31,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'ivan.horvat@example.com',
         ]);
         $demo->roles()->attach($roles['user']);
-        UserFile::factory(8)->create(['user_id' => $demo->id]); // > 5 => pagination visible
+        UserFile::factory(8)->create(['user_id' => $demo->id]);
 
-        // Random users with random files
         User::factory(5)->create()->each(function (User $u) use ($roles) {
             $u->roles()->attach($roles['user']);
             UserFile::factory(random_int(1, 7))->create(['user_id' => $u->id]);

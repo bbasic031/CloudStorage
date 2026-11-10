@@ -31,7 +31,10 @@ class FileController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $request->validate(['file' => ['required', 'file']]);
+        $request->validate(
+            ['file' => ['required', 'file', 'max:102400']],
+            ['file.max' => 'The file may not be larger than 100 MB.']
+        );
 
         $user = $request->user();
         $upload = $request->file('file');
@@ -40,7 +43,7 @@ class FileController extends Controller
             return back()->withErrors(['file' => 'Not enough free storage space for this file.']);
         }
 
-        $path = $upload->store("uploads/{$user->id}"); // private "local" disk
+        $path = $upload->store("uploads/{$user->id}");
 
         UserFile::create([
             'user_id' => $user->id,
@@ -72,5 +75,4 @@ class FileController extends Controller
 
         return back()->with('success', 'File deleted.');
     }
-
 }

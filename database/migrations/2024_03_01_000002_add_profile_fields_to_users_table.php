@@ -12,7 +12,6 @@ return new class extends Migration
             $table->string('username')->nullable()->unique()->after('id');
             $table->string('last_name')->nullable()->after('name');
             $table->string('address')->nullable()->after('email');
-            // storage quota in bytes, default 3 GB
             $table->unsignedBigInteger('storage_limit')->default(3 * 1024 * 1024 * 1024);
         });
     }

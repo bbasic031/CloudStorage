@@ -27,19 +27,19 @@
             <td>{{ $file->created_at->format('n/j/y, g:i A') }}</td>
             <td>{{ \Illuminate\Support\Number::fileSize($file->size, 2) }}</td>
             <td class="text-nowrap">
-            <div class="d-flex gap-1 justify-content-end">
-                <a href="{{ route('files.download', $file) }}" class="btn btn-primary btn-sm" title="Download">
-                    <i class="bi bi-download"></i>
-                </a>
-                @if(auth()->user()->canDeleteFile($file))
-                    <form method="POST" action="{{ route('files.destroy', $file) }}"
-                        onsubmit="return confirm('Delete this file?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-x-lg"></i></button>
-                    </form>
-                @endif
-            </div>
-        </td>
+                <div class="d-flex gap-1 justify-content-end">
+                    <a href="{{ route('files.download', $file) }}" class="btn btn-primary btn-sm" title="Download">
+                        <i class="bi bi-download"></i>
+                    </a>
+                    @if(auth()->user()->canDeleteFile($file))
+                        <form method="POST" action="{{ route('files.destroy', $file) }}"
+                              onsubmit="return confirm('Delete this file?')">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-x-lg"></i></button>
+                        </form>
+                    @endif
+                </div>
+            </td>
         </tr>
     @empty
         <tr><td colspan="{{ $isSuper ? 6 : 5 }}" class="text-center text-muted">No files yet.</td></tr>

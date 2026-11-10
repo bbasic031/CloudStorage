@@ -19,7 +19,6 @@ class UserFile extends Model
         return $this->belongsTo(User::class);
     }
 
-    /** [bootstrap-icons class, color class] depending on file extension */
     public function getIconAttribute(): array
     {
         return match (strtolower((string) $this->extension)) {

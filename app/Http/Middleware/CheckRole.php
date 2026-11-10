@@ -8,9 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
 {
-    /**
-     * Usage: ->middleware('role:super_admin') or 'role:admin,super_admin'
-     */
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
         $user = $request->user();

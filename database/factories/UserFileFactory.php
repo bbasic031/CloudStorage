@@ -22,13 +22,12 @@ class UserFileFactory extends Factory
             'path' => 'uploads/seed/'.Str::uuid().'.'.$ext,
             'extension' => $ext,
             'mime_type' => 'application/octet-stream',
-            'size' => fake()->numberBetween(10_000, 50_000_000), // fake size, only for demo quota
+            'size' => fake()->numberBetween(10_000, 50_000_000),
         ];
     }
 
     public function configure(): static
     {
-        // create a small placeholder so that "download" works for seeded rows
         return $this->afterCreating(function (UserFile $file) {
             Storage::put($file->path, 'Demo content for '.$file->original_name);
         });
