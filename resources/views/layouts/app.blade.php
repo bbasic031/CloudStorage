@@ -14,7 +14,7 @@
         @auth
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('files.index') }}">Files</a></li>
-                @if(auth()->user()->hasRole('super_admin'))
+                @if(auth()->user()->hasRole('super_admin', 'admin'))
                     <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
                 @endif
             </ul>

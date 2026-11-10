@@ -15,7 +15,7 @@ class FileController extends Controller
 
         $query = UserFile::with('user')->latest();
 
-        if (! $user->hasRole('super_admin')) {
+        if (! $user->canViewAllFiles()) {
             $query->where('user_id', $user->id);
         }
 
@@ -56,7 +56,7 @@ class FileController extends Controller
 
     public function download(Request $request, UserFile $file)
     {
-        $this->authorizeAccess($request, $file);
+        abort_unless($request->user()->canDownloadFile($file), 403);
 
         abort_unless(Storage::exists($file->path), 404, 'File not found on disk.');
 
@@ -65,7 +65,7 @@ class FileController extends Controller
 
     public function destroy(Request $request, UserFile $file): RedirectResponse
     {
-        $this->authorizeAccess($request, $file);
+        abort_unless($request->user()->canDeleteFile($file), 403);
 
         Storage::delete($file->path);
         $file->delete();
@@ -73,13 +73,4 @@ class FileController extends Controller
         return back()->with('success', 'File deleted.');
     }
 
-    private function authorizeAccess(Request $request, UserFile $file): void
-    {
-        $user = $request->user();
-
-        abort_unless(
-            $user->hasRole('super_admin') || $file->user_id === $user->id,
-            403
-        );
-    }
 }

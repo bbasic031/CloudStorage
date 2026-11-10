@@ -42,6 +42,21 @@ class User extends Authenticatable
         return $this->roles->pluck('name')->intersect($roles)->isNotEmpty();
     }
 
+    public function canViewAllFiles(): bool
+    {
+        return $this->hasRole('super_admin', 'admin');
+    }
+
+    public function canDownloadFile(UserFile $file): bool
+    {
+        return $this->canViewAllFiles() || $file->user_id === $this->id;
+    }
+
+    public function canDeleteFile(UserFile $file): bool
+    {
+        return $this->hasRole('super_admin') || $file->user_id === $this->id;
+    }
+
     public function usedSpace(): int
     {
         return (int) $this->files()->sum('size');
