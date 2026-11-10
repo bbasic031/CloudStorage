@@ -2,8 +2,8 @@
 
 ## Postavljanje
 ```bash
-composer create-project laravel/laravel:^11.0 ngcloud
-cd ngcloud
+composer create-project laravel/laravel:^11.0 CloudStorage
+cd CloudStorage
 # kopiraj sadržaj ovog foldera preko projekta (prepisuje bootstrap/app.php,
 # app/Models/User.php, app/Providers/AppServiceProvider.php,
 # database/factories/UserFactory.php i database/seeders/DatabaseSeeder.php)
@@ -13,11 +13,11 @@ U `.env` postavi MySQL:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=ngcloud
+DB_DATABASE=CloudStorage
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-Stvori praznu bazu `ngcloud`, pa:
+Stvori praznu bazu `CloudStorage`, pa:
 ```bash
 php artisan migrate:fresh --seed
 php artisan serve

@@ -11,10 +11,10 @@ class UserFactory extends Factory
     {
         return [
             'username' => fake()->unique()->userName(),
-            'name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
+            'name' => fake('hr_HR')->firstName(),
+            'last_name' => fake('hr_HR')->lastName(),
             'email' => fake()->unique()->safeEmail(),
-            'address' => fake()->address(),
+            'address' => fake('hr_HR')->address(),
             'email_verified_at' => now(),
             'password' => 'password', // hashed by the model cast
             'remember_token' => Str::random(10),
