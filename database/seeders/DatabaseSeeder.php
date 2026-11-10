@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         ])->roles()->attach($roles['admin']);
 
         $demo = User::factory()->create([
-            'username' => 'user', 'name' => 'Ivan', 'last_name' => 'Horvat',
-            'email' => 'user@example.com',
+            'username' => 'ivan.horvat', 'name' => 'Ivan', 'last_name' => 'Horvat',
+            'email' => 'ivan.horvat@example.com',
         ]);
         $demo->roles()->attach($roles['user']);
         UserFile::factory(8)->create(['user_id' => $demo->id]); // > 5 => pagination visible
